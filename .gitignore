@@ -15,6 +15,7 @@
 *.dylib
 
 # Executables
+src/transliterate
 *.exe
 *.out
 *.app
