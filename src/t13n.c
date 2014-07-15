@@ -5,22 +5,65 @@
 #include "t13n.h"
 #include "languages.h"
 
-typedef struct t13nTypeProc {
-  t13nType type;
-  void *proc;
-} t13nTypeProc;
+/**
+ * Word List Functions
+ */
 
-t13nTypeProc procs[] = {
-  {
-    RomanizeHangul,
-    &test,
-  },
-  {
-    HangulizeRoman,
-    &test,
-  },
-};
+wordList *wordListCreate(void)
+{
+  struct wordList *wordList;
 
+  if ((wordList = malloc(sizeof(*wordList))) == NULL) {
+    return NULL;
+  }
+
+  // Instantiate with defaults.
+  wordList->firstWord = wordList->lastWord = NULL;
+  wordList->length = 0;
+  wordList->free = NULL;
+
+  return wordList;
+}
+
+/**
+ * Word Functions
+ */
+word *wordCreate(void)
+{
+  struct word *word;
+
+  if ((word = malloc(sizeof(*word))) == NULL) {
+    return NULL;
+  }
+
+  // Instantiate with defaults.
+  word->firstCharacter = word->lastCharacter = NULL;
+  word->prevWord = word->nextWord = NULL;
+  word->length = 0;
+
+  return word;
+}
+
+/**
+ * Character Functions
+ */
+character *characterCreate(void)
+{
+  struct character *character;
+
+  if (character = malloc(sizeof(*character))) == NULL) {
+    return NULL;
+  }
+
+  character->data = NULL;
+  character->prevCharacter = character->nextCharacter = NULL;
+
+  return character;
+}
+
+
+/*
+// Add this to transliterate.c
 size_t transliterate(char *source, char *buffer, size_t bufferSize, t13nType t13nOperation)
 {
   size_t result = 0;
@@ -35,3 +78,4 @@ size_t transliterate(char *source, char *buffer, size_t bufferSize, t13nType t13
 
   return bufferSize;
 }
+*/
